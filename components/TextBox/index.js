@@ -33,7 +33,7 @@ const Index = ()=>{
                 margin-top:50px;
             }
                 #text-box{
-                    height:200px;
+                    min-height:200px;
                     width:500px;
                     background-color:#f0f0f0;
                     border-radius:4px;
