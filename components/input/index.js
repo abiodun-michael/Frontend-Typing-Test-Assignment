@@ -1,13 +1,36 @@
-
+import { useSelector, useDispatch } from 'react-redux'
+import {addAnswer} from '../../redux/reducer'
 
 
 const Input = ({...rest})=>{
 
+    const store = useSelector(e=>e.typeData)
+    const dispatch = useDispatch()
+
+  
+
     return(
         <>
-            <input {...rest}/>
+
+        <div id='input-wrapper'>
+            {
+                store.status && !store.isEnded ? <input {...rest} value={store.answer} onChange={(e)=>dispatch(addAnswer(e.target.value))}/>:
+                store.isEnded ? <p>Session Ended</p>:null
+            }
+        </div>
+            
 
             <style jsx>{`
+
+            #input-wrapper{
+                margin-top:150px;
+                width:100%;
+            }
+
+            #input-wrapper p{
+                color:red;
+                font-size:20px;
+            }
             
                 input{
                     height:45px;
@@ -15,7 +38,6 @@ const Input = ({...rest})=>{
                     border-radius:4px;
                     outline:none;
                     width:100%;
-                    margin-top:100px;
                     padding:0 10px;
                     transition:border 300ms;
                 }

@@ -9,7 +9,7 @@ const Index = ()=>{
         <>
         <Timer />
         <TextBox />
-        <Input />
+        <Input placeholder="Type here"/>
         
         </>
     )

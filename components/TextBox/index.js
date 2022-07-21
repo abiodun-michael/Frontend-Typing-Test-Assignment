@@ -1,16 +1,29 @@
 import Score from '../score'
+import { useSelector, useDispatch } from 'react-redux'
+import {addChallenge} from '../../redux/reducer'
+import { useState } from 'react'
+
+
+
 
 const Index = ()=>{
+    const [active, setActive] = useState(true)
+
+    const store = useSelector(e=>e.typeData)
+
+    const dispatch = useDispatch()
+
 
 
     return(
         <>
        
                 <div className="container">
-                <div className="text-box">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                <div id="text-box">
+                    <img id='pen' src="/svg/pen.svg" onClick={()=>setActive(!active)}/>
+                    <textarea value={store.challenge} disabled={active} onChange={(e)=>dispatch(addChallenge(e.target.value.trim()))}/>
                 </div>
-                <Score />
+                    <Score />
                 </div>
             <style jsx>{`
 
@@ -19,14 +32,37 @@ const Index = ()=>{
                 gap:50px;
                 margin-top:50px;
             }
-                .text-box{
-                    height:100px;
+                #text-box{
+                    height:200px;
                     width:500px;
                     background-color:#f0f0f0;
                     border-radius:4px;
                     padding:25px;
+                    position:relative;
+                }
+
+                #text-box textarea{
+                    height:100%;
+                    width:100%;
+                    outline:none;
+                    border:none;
+                    resize:none;
+                    font-family:'Roboto', san serif;
+                    background:transparent;
                     font-size:15px;
                     line-height:1.5
+                }
+
+                #pen{
+                    position:absolute;
+                    right:10px;
+                    top:10px;
+                    cursor:pointer;
+                    visibility:hidden;
+                    transition: visibility 300ms;
+                }
+                #text-box:hover #pen{
+                    visibility:visible
                 }
             `}</style>
         </>
